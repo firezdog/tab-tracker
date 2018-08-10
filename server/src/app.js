@@ -12,5 +12,9 @@ app.get('/status', (req, res) => {
   res.send({message: 'Hello world!'})
 })
 
+app.post('/register', (req, res) => {
+  res.send({message: `Hello ${req.body.email}, your password is ${req.body.password}`})
+})
+
 app.listen(process.env.PORT || 8000)
 console.log('Server running')
