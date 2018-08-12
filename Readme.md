@@ -1,0 +1,1 @@
+Note: this application uses node version 8.2.1
