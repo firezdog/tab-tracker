@@ -4,14 +4,14 @@
       <v-flex xs6 offset-xs3 column>
         <div class="white elevation-5">
           <v-toolbar id="toolbar" flat dense dark class="cyan">
-            <v-toolbar-title>Register</v-toolbar-title>
+            <v-toolbar-title>Login</v-toolbar-title>
           </v-toolbar>
           <v-alert
             class="feedback"
             :value="success"
             dismissible
             type="success">
-            Registration succeeded!
+            Login succeeded!
           </v-alert>
           <v-alert
             class="feedback"
@@ -20,21 +20,19 @@
             type="error">
             {{error}}
           </v-alert>
-          <div @keyup.enter="register"
+          <div @keyup.enter="login"
             class="pl-4 pr-4 pt-2 pb-2">
             <v-text-field
               label="Enter email address"
               class="form"
               type="email"
-              placeholder="jane@doe.com"
               v-model="email"
               name="email"/>
             <v-text-field
               label="Enter password"
               class="form" type="password"
-              placeholder="8-32 alphanumeric characters"
               v-model="password" name="password"/>
-            <v-btn dark class="cyan form" @click="register">Submit</v-btn>
+            <v-btn dark class="cyan form" @click="login">Submit</v-btn>
           </div>
         </div>
       </v-flex>
@@ -45,7 +43,7 @@
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
 export default {
-  name: 'Register',
+  name: 'Login',
   data () {
     return {
       email: '',
@@ -55,10 +53,10 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async login () {
       const formData = {email: this.email, password: this.password}
       try {
-        const response = await AuthenticationService.register(formData)
+        const response = await AuthenticationService.login(formData)
         this.error = ''
       } catch (err) {
         this.error = err.response.data.error
