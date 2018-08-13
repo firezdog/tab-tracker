@@ -32,6 +32,7 @@ export default {
       const formData = {email: this.email, password: this.password}
       try {
         const response = await AuthenticationService.register(formData)
+        this.error = `Registration of ${this.email} successful.`
       } catch (err) {
         this.error = err.response.data.error
       }
