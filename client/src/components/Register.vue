@@ -1,13 +1,13 @@
 <template>
   <v-layout>
     <v-flex xs6 offset-xs3>
-      <div class="white elevation-2">
+      <div class="white elevation-5">
         <v-toolbar flat dense class="cyan" dark>
           <v-toolbar-title>Register</v-toolbar-title>
         </v-toolbar>
         <div @keyup.enter="register" class="pl-4 pr-4 pt-2 pb-2">
-          <input class="form" type="email" placeholder="email" v-model="email" name="email"/>
-          <input class="form" type="password" placeholder="password" v-model="password" name="password"/>
+          <v-text-field class="form" type="email" placeholder="email" v-model="email" name="email"/>
+          <v-text-field class="form" type="password" placeholder="password" v-model="password" name="password"/>
           <v-btn class="cyan form" @click="register">Submit</v-btn>
           <p class="error" v-html="error"></p>
         </div>
@@ -43,11 +43,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#app > div > div > div > nav {
+  margin-bottom: 20px;
+}
 .error {
+  margin-top: 20px;
   color: red
 }
 .form {
   display: block;
   margin: 5px auto;
+}
+button.form {
+  margin-top: 20px;
 }
 </style>
