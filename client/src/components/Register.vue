@@ -1,13 +1,19 @@
 <template>
-  <div>
-    <h1>Register</h1>
-    <input type="email" placeholder="email" v-model="email" name="email"/>
-    <br/>
-    <input type="password" placeholder="password" v-model="password" name="password"/>
-    <br/>
-    <button @click="register">Submit</button>
-    <p> {{ response }} </p>
-  </div>
+  <v-layout>
+    <v-flex xs6 offset-xs3>
+      <div class="white elevation-2">
+        <v-toolbar flat dense class="cyan" dark>
+          <v-toolbar-title>Register</v-toolbar-title>
+        </v-toolbar>
+        <div @keyup.enter="register" class="pl-4 pr-4 pt-2 pb-2">
+          <input class="form" type="email" placeholder="email" v-model="email" name="email"/>
+          <input class="form" type="password" placeholder="password" v-model="password" name="password"/>
+          <v-btn class="cyan form" @click="register">Submit</v-btn>
+          <p class="error" v-html="error"></p>
+        </div>
+      </div>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -16,18 +22,18 @@ export default {
   name: 'Register',
   data () {
     return {
-      email: 'abc',
-      password: '123',
-      response: ''
+      email: '',
+      password: '',
+      error: ''
     }
   },
   methods: {
     async register () {
       const formData = {email: this.email, password: this.password}
       try {
-        this.response = await AuthenticationService.register(formData)
+        const response = await AuthenticationService.register(formData)
       } catch (err) {
-        this.response = err.response.data.error
+        this.error = err.response.data.error
       }
     }
   }
@@ -36,4 +42,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.error {
+  color: red
+}
+.form {
+  display: block;
+  margin: 5px auto;
+}
 </style>
