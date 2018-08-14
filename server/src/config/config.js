@@ -1,5 +1,8 @@
 module.exports = {
-  port: process.env.PORT || 8081,
+  authentication: {
+    jwtSecret: process.env.JWT_SECRET || 'secret'
+  },
+  port: process.env.PORT || 8082,
   db: {
     database: process.env.DB_NAME || 'tabtracker',
     user: process.env.DB_USER || 'tabtracker',

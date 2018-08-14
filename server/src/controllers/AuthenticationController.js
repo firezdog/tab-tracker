@@ -1,4 +1,14 @@
+// using destructuring to declare multiple models as needed?
 const {User} = require('../models')
+const jwt = require('jsonwebtoken')
+const config = require('../config/config')
+
+function jwtSignUser (user) {
+  const ONE_WEEK = 60 * 60 * 24 * 7
+  const options = {expiresIn: ONE_WEEK}
+  const token = jwt.sign(user, config.authentication.jwtSecret, options)
+  return token
+}
 
 module.exports = {
   async register (req, res) {
@@ -18,7 +28,6 @@ module.exports = {
         where: {email: email}
       })
       if (!user) {
-        console.log('user not found')
         return res.status(403).send({
           error: 'Problem with login credentials.'
         })
@@ -28,7 +37,9 @@ module.exports = {
           error: 'Problem with login credentials.'
         })
       }
-      return res.status(200).send(user.toJSON)
+      const userJson = user.toJSON()
+      const token = jwtSignUser(userJson)
+      return res.send({user: userJson, token: token})
     } catch (err) {
       return res.status(500).send({
         error: 'An error has occurred.'

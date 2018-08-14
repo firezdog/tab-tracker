@@ -1,9 +1,9 @@
 import axios from 'axios'
-
-// Need to find a way to set port correctly.
+// Need to find a way to set port correctly.  THIS IS DEF NOT SECURE!!!
+import serverConfig from '../../../server/src/config/config'
 
 export default () => {
   return axios.create({
-    baseURL: `http://localhost:8082`
+    baseURL: `http://localhost:${serverConfig.port}`
   })
 }
