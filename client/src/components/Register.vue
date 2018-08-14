@@ -9,14 +9,12 @@
           <v-alert
             class="feedback"
             :value="success"
-            dismissible
             type="success">
-            Registration succeeded!
+            Registration succeeded for {{user}}!
           </v-alert>
           <v-alert
             class="feedback"
             :value="error"
-            dismissible
             type="error">
             {{error}}
           </v-alert>
@@ -31,9 +29,12 @@
               name="email"/>
             <v-text-field
               label="Enter password"
-              class="form" type="password"
+              class="form"
+              type="password"
               placeholder="8-32 alphanumeric characters"
-              v-model="password" name="password"/>
+              v-model="password"
+              autocomplete="new-password"
+              name="password"/>
             <v-btn dark class="cyan form" @click="register">Submit</v-btn>
           </div>
         </div>
@@ -54,11 +55,22 @@ export default {
       success: false
     }
   },
+  computed: {
+    user: function () {
+      if (this.$store.state.user) {
+        return this.$store.state.user.email
+      } else {
+        return null
+      }
+    }
+  },
   methods: {
     async register () {
       const formData = {email: this.email, password: this.password}
       try {
         const response = await AuthenticationService.register(formData)
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
         this.error = ''
       } catch (err) {
         this.error = err.response.data.error

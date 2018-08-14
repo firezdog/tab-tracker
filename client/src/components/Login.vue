@@ -9,14 +9,12 @@
           <v-alert
             class="feedback"
             :value="success"
-            dismissible
             type="success">
-            Login succeeded!
+            Login succeeded for {{user}}!
           </v-alert>
           <v-alert
             class="feedback"
             :value="error"
-            dismissible
             type="error">
             {{error}}
           </v-alert>
@@ -30,8 +28,10 @@
               name="email"/>
             <v-text-field
               label="Enter password"
-              class="form" type="password"
-              v-model="password" name="password"/>
+              class="form"
+              type="password"
+              v-model="password"
+              name="password"/>
             <v-btn dark class="cyan form" @click="login">Submit</v-btn>
           </div>
         </div>
@@ -52,11 +52,23 @@ export default {
       success: false
     }
   },
+  computed: {
+    user: function () {
+      if (this.$store.state.user) {
+        return this.$store.state.user.email
+      } else {
+        return null
+      }
+    }
+  },
   methods: {
     async login () {
       const formData = {email: this.email, password: this.password}
       try {
         const response = await AuthenticationService.login(formData)
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
+        this.$store.dispatch('setIsLoggedIn', true)
         this.error = ''
       } catch (err) {
         this.error = err.response.data.error

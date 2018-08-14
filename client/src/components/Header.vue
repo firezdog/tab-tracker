@@ -9,7 +9,7 @@
         <v-btn flat dark>Browse</v-btn>
       </v-toolbar-items> -->
       <v-spacer></v-spacer>
-      <v-toolbar-items>
+      <v-toolbar-items v-if="!isLoggedIn">
         <v-btn flat dark to="register">Sign Up</v-btn>
         <v-btn flat dark to="login">Login</v-btn>
       </v-toolbar-items>
@@ -19,6 +19,12 @@
 
 <script>
 export default {
+  name: 'Header',
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.state.isLoggedIn
+    }
+  }
 }
 </script>
 

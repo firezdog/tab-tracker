@@ -13,16 +13,18 @@ function jwtSignUser (user) {
 module.exports = {
   async register (req, res) {
     try {
-      const user = await User.create(req.body)
-      return res.send(user.toJSON())
+      const newUser = await User.create(req.body)
+      const user = newUser.toJSON()
+      return res.send({user: user, token: jwtSignUser(user)})
     } catch (err) {
       return res.status(400).send({
-        error: 'Maybe: duplicate email found in database'
+        error: 'Duplicate email found in database'
       })
     }
   },
   async login (req, res) {
     const {email, password} = req.body
+    console.log(email, password)
     try {
       const user = await User.findOne({
         where: {email: email}
@@ -32,7 +34,9 @@ module.exports = {
           error: 'Problem with login credentials.'
         })
       }
-      if (user.password !== password) {
+      const isPassword = await user.comparePassword(password)
+      console.log(isPassword)
+      if (!isPassword) {
         return res.status(403).send({
           error: 'Problem with login credentials.'
         })
