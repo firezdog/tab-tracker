@@ -24,7 +24,6 @@ module.exports = {
   },
   async login (req, res) {
     const {email, password} = req.body
-    console.log(email, password)
     try {
       const user = await User.findOne({
         where: {email: email}
@@ -35,7 +34,6 @@ module.exports = {
         })
       }
       const isPassword = await user.comparePassword(password)
-      console.log(isPassword)
       if (!isPassword) {
         return res.status(403).send({
           error: 'Problem with login credentials.'

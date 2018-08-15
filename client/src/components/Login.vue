@@ -2,13 +2,10 @@
   <div>
     <v-layout>
       <v-flex xs6 offset-xs3 column>
-        <div class="white elevation-5">
-          <v-toolbar id="toolbar" flat dense dark class="cyan">
-            <v-toolbar-title>Login</v-toolbar-title>
-          </v-toolbar>
+        <panel title="Login">
           <v-alert
             class="feedback"
-            :value="success"
+            :value="user"
             type="success">
             Login succeeded for {{user}}!
           </v-alert>
@@ -34,22 +31,25 @@
               name="password"/>
             <v-btn dark class="cyan form" @click="login">Submit</v-btn>
           </div>
-        </div>
+        </panel>
       </v-flex>
     </v-layout>
   </div>
 </template>
 
 <script>
+import Panel from '@/components/Panel.vue'
 import AuthenticationService from '@/services/AuthenticationService'
 export default {
   name: 'Login',
+  components: {
+    Panel
+  },
   data () {
     return {
       email: '',
       password: '',
-      error: '',
-      success: false
+      error: ''
     }
   },
   computed: {
@@ -73,7 +73,6 @@ export default {
       } catch (err) {
         this.error = err.response.data.error
       }
-      this.success = this.error.length === 0
     }
   }
 }

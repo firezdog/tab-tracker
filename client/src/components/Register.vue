@@ -2,13 +2,10 @@
   <div>
     <v-layout>
       <v-flex xs6 offset-xs3 column>
-        <div class="white elevation-5">
-          <v-toolbar id="toolbar" flat dense dark class="cyan">
-            <v-toolbar-title>Register</v-toolbar-title>
-          </v-toolbar>
+        <panel title="Register">
           <v-alert
             class="feedback"
-            :value="success"
+            :value="user"
             type="success">
             Registration succeeded for {{user}}!
           </v-alert>
@@ -37,22 +34,25 @@
               name="password"/>
             <v-btn dark class="cyan form" @click="register">Submit</v-btn>
           </div>
-        </div>
+        </panel>
       </v-flex>
     </v-layout>
   </div>
 </template>
 
 <script>
+import Panel from '@/components/Panel.vue'
 import AuthenticationService from '@/services/AuthenticationService'
 export default {
   name: 'Register',
+  components: {
+    Panel
+  },
   data () {
     return {
       email: '',
       password: '',
-      error: '',
-      success: false
+      error: ''
     }
   },
   computed: {
@@ -71,11 +71,11 @@ export default {
         const response = await AuthenticationService.register(formData)
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
+        this.$store.dispatch('setIsLoggedIn', true)
         this.error = ''
       } catch (err) {
         this.error = err.response.data.error
       }
-      this.success = this.error.length === 0
     }
   }
 }
