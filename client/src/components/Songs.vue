@@ -3,7 +3,18 @@
     <v-layout>
       <v-flex xs6 offset-xs3 column>
         <panel title="Songs">
-          <v-icon>add_circle</v-icon>
+          <template slot="button">
+            <v-btn
+            small
+            absolute
+            right
+            fab
+            outline
+            class="cyan accent-3"
+            to="/songs/new">
+              <v-icon>add</v-icon>
+            </v-btn>
+          </template>
           <div v-for="song in songs" :key="song.id">
             {{song.title}} - {{song.artist}} - {{song.album}}
           </div>

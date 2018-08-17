@@ -2,6 +2,7 @@
   <div class="white elevation-5">
     <v-toolbar flat dense dark class="cyan">
       <v-toolbar-title>{{title}}</v-toolbar-title>
+      <slot name="button"></slot>
     </v-toolbar>
     <div>
       <slot></slot>
