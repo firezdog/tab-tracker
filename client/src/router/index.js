@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Songs from '@/components/Songs'
+import NewSong from '@/components/NewSong'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/songs',
       name: 'songs',
       component: Songs
+    },
+    {
+      path: '/songs/new',
+      name: 'NewSong',
+      component: NewSong
     }
   ]
 })
