@@ -1,27 +1,28 @@
 <template>
-  <div>
-    <v-layout>
-      <v-flex xs6 offset-xs3 column>
-        <panel title="Songs">
-          <template slot="button">
-            <v-btn
-            small
-            absolute
-            right
-            fab
-            outline
-            class="cyan accent-3"
-            to="/songs/new">
-              <v-icon>add</v-icon>
-            </v-btn>
-          </template>
-          <div v-for="song in songs" :key="song.id">
-            {{song.title}} - {{song.artist}} - {{song.album}}
-          </div>
-        </panel>
-      </v-flex>
-    </v-layout>
-  </div>
+  <panel title="Songs">
+    <v-btn slot="button"
+    small
+    absolute
+    right
+    fab
+    outline
+    class="cyan accent-3"
+    to="/songs/new">
+      <v-icon>add</v-icon>
+    </v-btn>
+    <div v-for="song in songs" class="pb-2" :key="song.id">
+      <v-layout>
+        <v-flex xs6 offset-xs1>
+          <div>{{song.title}}</div>
+          <div>{{song.artist}}</div>
+          <div>{{song.genre}}</div>
+        </v-flex>
+          <img class="AlbumImage" :src="song.albumImageUrl"/>
+        <v-flex xs6>
+        </v-flex>
+      </v-layout>
+    </div>
+  </panel>
 </template>
 
 <script>
@@ -45,4 +46,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.AlbumImage {
+  width: 300px;
+  height: 300px;
+}
 </style>

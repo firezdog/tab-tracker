@@ -5,13 +5,13 @@
         <v-btn id="home" flat dark to="/">TabTracker</v-btn>
       </v-toolbar-title>
       <v-toolbar-items>
-        <v-btn to="/songs" flat dark>Browse</v-btn>
-        <v-btn to="/songs/new" flat dark>New Song</v-btn>
+        <v-btn exact :to="{name: 'songs'}" flat dark>Browse</v-btn>
+        <v-btn :to="{name: 'NewSong'}" flat dark>New Song</v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn v-if="!isLoggedIn" flat dark to="/register">Sign Up</v-btn>
-        <v-btn v-if="!isLoggedIn" flat dark to="/login">Login</v-btn>
+        <v-btn v-if="!isLoggedIn" flat dark :to="{name: 'register'}">Sign Up</v-btn>
+        <v-btn v-if="!isLoggedIn" flat dark :to="{name: 'login'}">Login</v-btn>
         <v-btn v-if="isLoggedIn" flat dark @click="logout">Logout</v-btn>
       </v-toolbar-items>
     </v-toolbar>
