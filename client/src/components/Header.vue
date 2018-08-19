@@ -2,7 +2,7 @@
   <div>
     <v-toolbar fixed class="cyan">
       <v-toolbar-title class="mr-4">
-        <v-btn id="home" flat dark to="/">TabTracker</v-btn>
+        <v-btn exact id="home" flat dark to="/">TabTracker</v-btn>
       </v-toolbar-title>
       <v-toolbar-items>
         <v-btn exact :to="{name: 'songs'}" flat dark>Browse</v-btn>
