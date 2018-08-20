@@ -10,12 +10,20 @@
     to="/songs/new">
       <v-icon>add</v-icon>
     </v-btn>
-    <div v-for="song in songs" class="pb-2" :key="song.id">
+    <div v-for="song in songs" class="Song" :key="song.id">
       <v-layout>
-        <v-flex xs6 offset-xs1>
-          <div>{{song.title}}</div>
-          <div>{{song.artist}}</div>
-          <div>{{song.genre}}</div>
+        <v-btn
+        color="cyan"
+        :to="{name: 'song', params: {songId: song.id}}"
+        outline
+        fab small
+        top left relative>
+          <v-icon>remove_red_eye</v-icon>
+        </v-btn>
+        <v-flex xs12 text-xs-left class="ml-4">
+          <div class="SongTitle">{{song.title}}</div>
+          <div class="SongArtist">{{song.artist}}</div>
+          <div class="SongGenre">{{song.genre}}</div>
         </v-flex>
           <img class="AlbumImage" :src="song.albumImageUrl"/>
         <v-flex xs6>
@@ -46,8 +54,24 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.Song {
+  padding: 20px;
+  height: 70%;
+  overflow: hidden;
+}
 .AlbumImage {
   width: 300px;
   height: 300px;
+  margin: 0 auto;
+}
+.SongTitle {
+  font-size: 30px;
+}
+.SongGenre {
+  font-size: 18px
+
+}
+.SongArtist {
+  font-size: 18px;
 }
 </style>

@@ -37,10 +37,10 @@
               </v-text-field>
               <v-text-field
               label="Album"
-              v-model="song.album"
               required
               :rules="[rules.required]"
               outline
+              v-model="song.album"
               >
               </v-text-field>
               <v-text-field
