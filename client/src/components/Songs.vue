@@ -60,8 +60,7 @@ export default {
   overflow: hidden;
 }
 .AlbumImage {
-  width: 300px;
-  height: 300px;
+  height: 20rem;
   margin: 0 auto;
 }
 .SongTitle {
