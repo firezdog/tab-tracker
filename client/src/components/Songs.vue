@@ -20,13 +20,13 @@
         top left relative>
           <v-icon>remove_red_eye</v-icon>
         </v-btn>
-        <v-flex xs12 text-xs-left class="ml-4">
+        <v-flex xs6 text-xs-left class="ml-4">
           <div class="SongTitle">{{song.title}}</div>
           <div class="SongArtist">{{song.artist}}</div>
           <div class="SongGenre">{{song.genre}}</div>
         </v-flex>
-          <img class="AlbumImage" :src="song.albumImageUrl"/>
         <v-flex xs6>
+          <img class="AlbumImage" :src="song.albumImageUrl"/>
         </v-flex>
       </v-layout>
     </div>
@@ -60,17 +60,20 @@ export default {
   overflow: hidden;
 }
 .AlbumImage {
-  height: 20rem;
+  height: 100%;
+  width: 100%;
   margin: 0 auto;
 }
 .SongTitle {
-  font-size: 30px;
+  font-size: 200%;
+  font-weight: 500;
 }
 .SongGenre {
-  font-size: 18px
+  font-size: 100%;
 
 }
 .SongArtist {
-  font-size: 18px;
+  font-style: italic;
+  font-size: 150%;
 }
 </style>

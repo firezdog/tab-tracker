@@ -2,7 +2,7 @@
   <div>
     <v-layout>
       <v-flex xs6>
-        <panel title="Metadata">
+        <panel title="Song Metadata">
           <v-alert
             class="feedback"
             type="error"
@@ -65,7 +65,7 @@
        </panel>
       </v-flex>
       <v-flex ml-3 xs-6>
-        <panel title="Content">
+        <panel title="Song Content">
           <v-form ref="song_form_pt2" v-model="song_valid" lazy-validation>
             <v-flex xs-11 mt-4 ml-4 mr-4>
               <v-textarea
