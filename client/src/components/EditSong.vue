@@ -120,7 +120,7 @@ export default {
           this.error = ''
           this.$refs.song_form.reset()
           this.$refs.song_form_pt2.reset()
-          this.$router.push({name: 'songs'})
+          this.$router.push({name: 'song', params: {songId: song.id}})
         } catch (err) {
           this.error = 'An error occurred.'
         }
