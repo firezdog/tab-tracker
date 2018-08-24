@@ -9,5 +9,8 @@ export default {
   },
   getOneSong (id) {
     return api().get(`songs/${id}`)
+  },
+  updateSong (song) {
+    return api().post(`songs/${song.id}`, song)
   }
 }

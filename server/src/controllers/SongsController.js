@@ -25,7 +25,6 @@ module.exports = {
   },
 
   async view (req, res) {
-    console.log(req.params.song_id)
     try {
       const song = await Song.findOne({where: {id: req.params.song_id}})
       if (!song) {
@@ -38,6 +37,17 @@ module.exports = {
     } catch (err) {
       res.status(500).send({
         error: 'There was an error fetching song data.'
+      })
+    }
+  },
+
+  async update (req, res) {
+    try {
+      await Song.update(req.body, {where: {id: req.params.song_id}})
+      res.send({song: req.body})
+    } catch (err) {
+      res.status(500).send({
+        error: 'There was an error posting song data.'
       })
     }
   }

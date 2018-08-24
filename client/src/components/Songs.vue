@@ -13,12 +13,20 @@
     <div v-for="song in songs" class="Song" :key="song.id">
       <v-layout>
         <v-btn
-        color="cyan"
         :to="{name: 'song', params: {songId: song.id}}"
+        color="cyan"
         outline
         fab small
-        top left relative>
+        top right relative>
           <v-icon>remove_red_eye</v-icon>
+        </v-btn>
+        <v-btn
+        :to="{name: 'EditSong', params: {songId: song.id}}"
+        color="orange"
+        outline
+        fab small
+        top right relative>
+          <v-icon>edit</v-icon>
         </v-btn>
         <v-flex xs6 text-xs-left class="ml-4">
           <div class="SongTitle">{{song.title}}</div>
