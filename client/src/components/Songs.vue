@@ -25,8 +25,9 @@
           <div class="SongArtist">{{song.artist}}</div>
           <div class="SongGenre">{{song.genre}}</div>
         </v-flex>
-        <v-flex xs6>
+        <v-flex xs6 text-xs-centre>
           <img class="AlbumImage" :src="song.albumImageUrl"/>
+          <p>{{song.album}}</p>
         </v-flex>
       </v-layout>
     </div>
@@ -60,8 +61,8 @@ export default {
   overflow: hidden;
 }
 .AlbumImage {
-  height: 100%;
-  width: 100%;
+  box-shadow: 6px 3px 10px darkgrey;
+  width: 300px;
   margin: 0 auto;
 }
 .SongTitle {

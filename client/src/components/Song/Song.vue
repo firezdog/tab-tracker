@@ -1,16 +1,23 @@
 <template>
   <div>
-    <!-- top tabs !-->
-    <SongMeta :song="song"/>
+    <v-layout>
+      <!-- top left tab !-->
+      <v-flex class="mr-3" xs6>
+        <SongMeta :song="song"/>
+      </v-flex>
+      <!-- top right tab !-->
+      <v-flex xs6>
+        <tab :song="song"/>
+      </v-flex>
+    </v-layout>
     <v-layout class="mt-3">
       <!-- bottom left tab !-->
       <v-flex class="mr-3" xs6>
-        <panel title="YouTube Video">
-        </panel>
+        <Youtube :youtubeId="song.youtubeId"/>
       </v-flex>
       <!-- bottom right tab !-->
       <v-flex xs6>
-        <panel title="Lyrics">
+        <panel class="Panel" title="Lyrics">
           <textarea
           multi-line
           readonly
@@ -26,8 +33,10 @@
 import SongService from '@/services/SongService'
 import SongMeta from '@/components/Song/SongMetadata'
 import Panel from '@/components/Panel.vue'
+import Youtube from '@/components/Song/Youtube'
+import Tab from '@/components/Song/Tab'
 export default {
-  components: {Panel, SongMeta},
+  components: {Panel, SongMeta, Youtube, Tab},
   data () {
     return {
       song: null
@@ -40,6 +49,10 @@ export default {
 </script>
 
 <style scoped>
+.Panel {
+  height: 650px;
+  overflow: hidden;
+}
 textarea {
   width: 100%;
   font-family: monospace;

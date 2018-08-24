@@ -1,33 +1,17 @@
 <template>
-  <div>
+  <panel class="Panel" title="Song Metadata">
     <v-layout>
-      <!-- top left tab !-->
-      <v-flex class="mr-3" xs6>
-        <panel class="Metadata" title="Song Metadata">
-          <v-layout>
-            <v-flex xs3 text-xs-left>
-              <div class="SongTitle">{{song.title}}</div>
-              <div class="SongArtist">{{song.artist}}</div>
-              <div class="SongGenre">{{song.genre}}</div>
-            </v-flex>
-            <v-flex xs9>
-              <img class="AlbumImage" :src="song.albumImageUrl"/>
-            </v-flex>
-          </v-layout>
-        </panel>
+      <v-flex xs3 text-xs-left>
+        <div class="SongTitle">{{song.title}}</div>
+        <div class="SongArtist">{{song.artist}}</div>
+        <div class="SongGenre">{{song.genre}}</div>
       </v-flex>
-      <!-- top right tab !-->
-      <v-flex xs6>
-        <panel title="Tab">
-          <textarea
-          multi-line
-          readonly
-          v-model="song.tab">
-          </textarea>
-        </panel>
+      <v-flex xs9>
+        <img class="AlbumImage" :src="song.albumImageUrl"/>
+        <p>{{song.album}}</p>
       </v-flex>
     </v-layout>
-  </div>
+  </panel>
 </template>
 
 <script>
@@ -41,9 +25,9 @@ export default {
 </script>
 
 <style scoped>
-.Metadata {
-  height: 670px;
-  overflow: auto;
+.Panel {
+  overflow: hidden;
+  height: 650px;
 }
 .SongTitle {
   font-size: 125%;
@@ -58,18 +42,9 @@ export default {
   font-style: italic;
 }
 .AlbumImage {
-  height: 100%;
-  width: 100%;
-  margin: 20px auto;
-}
-textarea {
-  width: 100%;
-  font-family: monospace;
-  border: none;
-  border-style: none;
-  height: 600px;
-  border-color: transparent;
-  overflow: auto;
-  padding: 40px;
+  margin: 20px auto 0 auto;
+  box-shadow: 6px 3px 10px darkgrey;
+  height: 70%;
+  width: 70%;
 }
 </style>
