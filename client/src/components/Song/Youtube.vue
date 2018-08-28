@@ -1,5 +1,5 @@
 <template>
-  <Panel class="Panel" title="YouTube">
+  <Panel title="YouTube">
     <youtube id="youtube"
     :video-id="youtubeId"
     :player-height="350"
@@ -20,8 +20,5 @@ export default {
 <style scoped>
 #youtube {
   margin-top: 30px;
-}
-Panel {
-  height: 650px;
 }
 </style>

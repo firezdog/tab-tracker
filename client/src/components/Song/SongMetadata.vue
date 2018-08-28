@@ -1,5 +1,5 @@
 <template>
-  <panel class="Panel" title="Song Metadata">
+  <panel title="Song Metadata">
     <v-layout>
       <v-flex xs3 text-xs-left>
         <div class="SongTitle">{{song.title}}</div>
@@ -25,10 +25,6 @@ export default {
 </script>
 
 <style scoped>
-.Panel {
-  overflow: hidden;
-  height: 650px;
-}
 .SongTitle {
   font-size: 125%;
   font-weight: 500;

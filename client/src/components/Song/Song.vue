@@ -3,40 +3,35 @@
     <v-layout>
       <!-- top left tab !-->
       <v-flex class="mr-3" xs6>
-        <SongMeta :song="song"/>
+        <SongMeta class="Panel" :song="song"/>
       </v-flex>
       <!-- top right tab !-->
       <v-flex xs6>
-        <tab :song="song"/>
+        <tab class="Panel" :song="song"/>
       </v-flex>
     </v-layout>
     <v-layout class="mt-3">
       <!-- bottom left tab !-->
       <v-flex class="mr-3" xs6>
-        <Youtube :youtubeId="song.youtubeId"/>
+        <Youtube class="Panel" :youtubeId="song.youtubeId"/>
       </v-flex>
       <!-- bottom right tab !-->
       <v-flex xs6>
-        <panel class="Panel" title="Lyrics">
-          <textarea
-          multi-line
-          readonly
-          v-model="song.lyrics">
-          </textarea>
-        </panel>
+        <Lyrics class="Panel" :lyrics="song.lyrics"/>
       </v-flex>
     </v-layout>
   </div>
 </template>
 
 <script>
-import SongService from '@/services/SongService'
 import SongMeta from '@/components/Song/SongMetadata'
-import Panel from '@/components/Panel.vue'
 import Youtube from '@/components/Song/Youtube'
 import Tab from '@/components/Song/Tab'
+import Lyrics from '@/components/Song/Lyrics'
+import Panel from '@/components/Panel.vue'
+import SongService from '@/services/SongService'
 export default {
-  components: {Panel, SongMeta, Youtube, Tab},
+  components: {Panel, SongMeta, Youtube, Tab, Lyrics},
   data () {
     return {
       song: null
@@ -48,19 +43,20 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .Panel {
-  height: 650px;
-  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
 textarea {
   width: 100%;
+  height: 30em;
   font-family: monospace;
   border: none;
   border-style: none;
-  height: 600px;
   border-color: transparent;
   overflow: auto;
   padding: 40px;
+  white-space: pre;
 }
 </style>
