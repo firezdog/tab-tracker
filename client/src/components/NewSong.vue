@@ -93,11 +93,9 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel.vue'
 import SongService from '@/services/SongService'
 export default {
   name: 'NewSong',
-  components: { Panel },
   data () {
     return {
       song_valid: true,

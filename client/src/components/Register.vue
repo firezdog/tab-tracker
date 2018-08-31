@@ -41,13 +41,9 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel.vue'
 import AuthenticationService from '@/services/AuthenticationService'
 export default {
   name: 'Register',
-  components: {
-    Panel
-  },
   data () {
     return {
       email: '',

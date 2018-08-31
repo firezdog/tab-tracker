@@ -15,9 +15,7 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel.vue'
 export default {
-  components: {Panel},
   props: [
     'song'
   ]

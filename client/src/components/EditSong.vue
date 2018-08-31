@@ -93,11 +93,9 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
 import SongService from '@/services/SongService'
 export default {
   name: 'EditSong',
-  components: { Panel },
   async mounted () {
     this.song = (await SongService.getOneSong(this.$store.state.route.params.songId)).data
   },

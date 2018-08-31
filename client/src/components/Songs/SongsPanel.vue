@@ -43,25 +43,11 @@
 </template>
 
 <script>
-import Panel from '@/components/Panel'
-import SongService from '@/services/SongService'
 export default {
-  name: 'Songs',
-  components: {
-    Panel
-  },
-  data () {
-    return {
-      songs: null
-    }
-  },
-  async mounted () {
-    this.songs = (await SongService.getAllSongs()).data
-  }
+  props: ['songs']
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .Song {
   padding: 20px;

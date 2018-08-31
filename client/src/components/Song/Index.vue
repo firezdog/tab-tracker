@@ -28,10 +28,9 @@ import SongMeta from '@/components/Song/SongMetadata'
 import Youtube from '@/components/Song/Youtube'
 import Tab from '@/components/Song/Tab'
 import Lyrics from '@/components/Song/Lyrics'
-import Panel from '@/components/Panel.vue'
 import SongService from '@/services/SongService'
 export default {
-  components: {Panel, SongMeta, Youtube, Tab, Lyrics},
+  components: {SongMeta, Youtube, Tab, Lyrics},
   data () {
     return {
       song: null
