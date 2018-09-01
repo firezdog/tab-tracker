@@ -12,5 +12,12 @@ export default {
   },
   updateSong (song) {
     return api().put(`songs/${song.id}`, song)
+  },
+  searchSongs (search) {
+    return api().get('songs', {
+      params: {
+        search: search
+      }
+    })
   }
 }

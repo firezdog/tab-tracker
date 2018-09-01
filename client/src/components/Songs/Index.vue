@@ -1,11 +1,9 @@
 <template>
   <div>
-    <v-flex xs6 offset-xs3>
-    <song-search-panel/>
-    </v-flex>
     <v-layout>
       <v-flex xs6 offset-xs3>
-        <songs-panel :songs='songs'/>
+        <song-search-panel/>
+        <songs-panel class="mt-2" :songs='songs'/>
       </v-flex>
     </v-layout>
   </div>
@@ -21,6 +19,14 @@ export default {
   data () {
     return {
       songs: null
+    }
+  },
+  watch: {
+    '$route.query.search': {
+      immediate: true,
+      async handler (search) {
+        this.songs = (await SongService.searchSongs(search)).data
+      }
     }
   },
   async mounted () {
