@@ -4,12 +4,7 @@
       <v-flex xs6 offset-xs3 column>
         <panel title="Login">
           <v-alert
-            class="feedback"
-            :value="user"
-            type="success">
-            Login succeeded for {{user}}!
-          </v-alert>
-          <v-alert
+            slot="warning"
             class="feedback"
             :value="error"
             type="error">
@@ -66,6 +61,7 @@ export default {
         this.$store.dispatch('setUser', response.data.user)
         this.$store.dispatch('setIsLoggedIn', true)
         this.error = ''
+        this.$router.push({name: 'songs'})
       } catch (err) {
         this.error = err.response.data.error
       }

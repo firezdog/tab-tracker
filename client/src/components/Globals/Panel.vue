@@ -4,8 +4,11 @@
           <v-toolbar-title>{{title}}</v-toolbar-title>
         <slot name="button"></slot>
       </v-toolbar>
-    <div class="pl-4 pr-4 pt-2 pb-2">
-      <slot></slot>
+    <div>
+      <slot name="warning"></slot>
+      <div  class="pl-4 pt-4 pr-4 pb-4">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>

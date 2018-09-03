@@ -33,7 +33,7 @@ export default {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
       this.$store.dispatch('setIsLoggedIn', false)
-      this.$router.push({name: 'root'})
+      this.$router.push({name: 'login'})
     }
   }
 }

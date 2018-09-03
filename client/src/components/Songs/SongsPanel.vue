@@ -13,7 +13,10 @@
     <div v-for="song in songs" class="Song" :key="song.id">
       <v-layout>
         <v-btn
-        :to="{name: 'song', params: {songId: song.id}}"
+        :to="{
+          name: 'song',
+          params: {songId: song.id}
+        }"
         color="cyan"
         outline
         fab small
