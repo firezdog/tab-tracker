@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
   data () {
     return {
@@ -15,7 +16,7 @@ export default {
     }
   },
   watch: {
-    search (value) {
+    search: _.debounce(async function (value) {
       const route = {
         name: 'songs'
       }
@@ -25,12 +26,12 @@ export default {
         }
       }
       this.$router.push(route)
-    },
+    }, 200),
     // I also thought of doing this using mounted() -- not sure which is better?
     '$route.query.search': {
       immediate: true,
       handler (value) {
-        this.search = value;
+        this.search = value
       }
     }
   }
