@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   authentication: {
     jwtSecret: process.env.JWT_SECRET || 'secret'
@@ -10,7 +12,7 @@ module.exports = {
     options: {
       dialect: process.env.DIALECT || 'sqlite',
       host: process.env.HOST || 'localhost',
-      storage: './tabtracker.sqlite'
+      storage: path.resolve(__dirname, '../../tabtracker.sqlite')
     }
   }
 }
