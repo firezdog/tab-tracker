@@ -23,6 +23,13 @@ fs
     db[model.name] = model
   })
 
+// Associations
+Object.keys(db).forEach(function (modelName) {
+  if ('associate' in db[modelName]) {
+    db[modelName].associate(db)
+  }
+})
+
 // make both instance and class accessible from db object.
 db.sequelize = sequelize
 db.Sequelize = Sequelize
