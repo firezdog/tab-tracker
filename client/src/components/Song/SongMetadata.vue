@@ -1,5 +1,8 @@
 <template>
   <panel title="Song Metadata">
+    <div id="bookmark-div">
+      <v-icon id="bookmark-icon" right>bookmark</v-icon>
+    </div>
     <v-layout>
       <v-flex xs3 text-xs-left>
         <div class="SongTitle">{{song.title}}</div>
@@ -40,5 +43,21 @@ export default {
   box-shadow: 6px 3px 10px darkgrey;
   height: 70%;
   width: 70%;
+}
+#bookmark-div {
+  position: relative;
+}
+#bookmark-icon {
+  font-size: 36px;
+  position: absolute;
+  bottom: 30px;
+  right: -15px;
+}
+#bookmark-icon:hover {
+  cursor: pointer;
+  font-size: 80px;
+  bottom: -5px;
+  right: -30px;
+  color: red;
 }
 </style>
