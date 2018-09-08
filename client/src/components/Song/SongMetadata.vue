@@ -1,7 +1,7 @@
 <template>
   <panel title="Song Metadata">
     <div id="bookmark-div">
-      <v-icon id="bookmark-icon" right>bookmark</v-icon>
+      <v-icon id="bookmark-icon" @click="bookmark" :class="{bookmarked: bookmarked}" right>bookmark</v-icon>
     </div>
     <v-layout>
       <v-flex xs3 text-xs-left>
@@ -21,7 +21,17 @@
 export default {
   props: [
     'song'
-  ]
+  ],
+  data () {
+    return {
+      bookmarked: false
+    }
+  },
+  methods: {
+    bookmark () {
+      this.bookmarked = !this.bookmarked
+    }
+  }
 }
 </script>
 
@@ -52,6 +62,16 @@ export default {
   position: absolute;
   bottom: 30px;
   right: -15px;
+  color: green;
+}
+#bookmark-icon.bookmarked {
+  color: red;
+}
+#bookmark-icon.bookmarked:active {
+  color: red;
+}
+#bookmark-icon.bookmarked:hover {
+  color: green;
 }
 #bookmark-icon:hover {
   cursor: pointer;
@@ -59,5 +79,8 @@ export default {
   bottom: -5px;
   right: -30px;
   color: red;
+}
+#bookmark-icon:active {
+  color: green;
 }
 </style>
