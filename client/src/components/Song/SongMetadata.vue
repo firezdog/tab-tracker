@@ -1,7 +1,7 @@
 <template>
   <panel title="Song Metadata">
     <div id="bookmark-div">
-      <v-icon id="bookmark-icon" @click="bookmark" :class="{bookmarked: bookmarked}" right>bookmark</v-icon>
+      <v-icon id="bookmark-icon" @click="bookmark" :class="{bookmarked: bookmarked}">bookmark</v-icon>
     </div>
     <v-layout>
       <v-flex xs3 text-xs-left>
@@ -31,19 +31,27 @@ export default {
   },
   async mounted () {
     const response = (
-      await _bs.
-      isBookmarked(this.userId, this.song.id)).
-    data
-    response.result ? 
-      this.bookmarked = true : 
-      this.bookmarked = false
+      await _bs
+        .isBookmarked(this.userId, this.song.id))
+      .data
+    if (response.result) {
+      this.bookmarked = true
+    }
   },
   methods: {
     async bookmark () {
+      const user = this.userId
+      const song = this.song.id
+      let res = null
       if (!this.bookmarked) {
-        const res = (await _bs.addBookmark (this.userId, this.song.id)).data
+        res = (await _bs.addBookmark(user, song)).data
         if (res.bookmark) {
           this.bookmarked = true
+        }
+      } else {
+        res = (await _bs.deleteBookmark(user, song)).data
+        if (res.message === 'Success') {
+          this.bookmarked = false
         }
       }
     }

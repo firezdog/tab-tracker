@@ -20,16 +20,28 @@ module.exports = {
 
   async create (req, res) {
     try {
-      const payload = req.body
+      const {userId, songId} = req.body
       const bookmark = await Bookmark.create({})
-      const user = await User.findOne({where: {id: payload.userId}})
-      const song = await Song.findOne({where: {id: payload.songId}})
+      const user = await User.findOne({where: {id: userId}})
+      const song = await Song.findOne({where: {id: songId}})
       bookmark.setSong(song)
       bookmark.setUser(user)
       res.send({bookmark: true})
     } catch (error) {
       console.log(error)
       res.status(500).send({error})
+    }
+  },
+
+  async destroy (req, res) {
+    try {
+      const {userId, songId} = req.body
+      console.log(userId, songId)
+      const bookmark = await Bookmark.findOne({where: {songId, userId}})
+      await bookmark.destroy()
+      res.send({message: 'Success'})
+    } catch (error) {
+      res.status(500).send({error: 'There was an error.'})
     }
   }
 

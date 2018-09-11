@@ -9,5 +9,8 @@ export default {
   },
   addBookmark (userId, songId) {
     return api().post('bookmarks', {userId, songId})
+  },
+  deleteBookmark (userId, songId) {
+    return api().delete('bookmarks', {data: {userId, songId}})
   }
 }
