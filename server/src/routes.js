@@ -14,4 +14,5 @@ module.exports = (app) => {
   app.get('/songs/:song_id', SongsController.view)
   app.put('/songs/:song_id', SongsController.update)
   app.get('/bookmarks', BookmarksController.index)
+  app.post('/bookmarks', BookmarksController.create)
 }

@@ -18,18 +18,34 @@
 </template>
 
 <script>
+import _bs from '@/services/BookmarkService'
 export default {
   props: [
     'song'
   ],
   data () {
     return {
-      bookmarked: false
+      bookmarked: false,
+      userId: this.$store.state.user.id
     }
   },
+  async mounted () {
+    const response = (
+      await _bs.
+      isBookmarked(this.userId, this.song.id)).
+    data
+    response.result ? 
+      this.bookmarked = true : 
+      this.bookmarked = false
+  },
   methods: {
-    bookmark () {
-      this.bookmarked = !this.bookmarked
+    async bookmark () {
+      if (!this.bookmarked) {
+        const res = (await _bs.addBookmark (this.userId, this.song.id)).data
+        if (res.bookmark) {
+          this.bookmarked = true
+        }
+      }
     }
   }
 }
@@ -64,23 +80,13 @@ export default {
   right: -15px;
   color: green;
 }
-#bookmark-icon.bookmarked {
-  color: red;
-}
-#bookmark-icon.bookmarked:active {
-  color: red;
-}
-#bookmark-icon.bookmarked:hover {
-  color: green;
-}
 #bookmark-icon:hover {
   cursor: pointer;
   font-size: 80px;
   bottom: -5px;
   right: -30px;
-  color: red;
 }
-#bookmark-icon:active {
-  color: green;
+#bookmark-icon.bookmarked {
+  color: red;
 }
 </style>

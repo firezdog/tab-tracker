@@ -1,5 +1,5 @@
 /* jshint ignore:start */
-const {Bookmark} = require('../models')
+const {Bookmark, User, Song} = require('../models')
 
 module.exports = {
 
@@ -15,6 +15,21 @@ module.exports = {
       }
     } catch (err) {
       res.status(500).json({error: 'An error occurred.'})
+    }
+  },
+
+  async create (req, res) {
+    try {
+      const payload = req.body
+      const bookmark = await Bookmark.create({})
+      const user = await User.findOne({where: {id: payload.userId}})
+      const song = await Song.findOne({where: {id: payload.songId}})
+      bookmark.setSong(song)
+      bookmark.setUser(user)
+      res.send({bookmark: true})
+    } catch (error) {
+      console.log(error)
+      res.status(500).send({error})
     }
   }
 
