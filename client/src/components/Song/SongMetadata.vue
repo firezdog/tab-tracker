@@ -1,7 +1,15 @@
 <template>
   <panel title="Song Metadata">
     <div id="bookmark-div">
-      <v-icon id="bookmark-icon" @click="bookmark" :class="{bookmarked: bookmarked}">bookmark</v-icon>
+      <v-icon v-if="isLoggedIn" id="bookmark-icon" @click="bookmark" :class="{bookmarked: bookmarked}">bookmark</v-icon>
+    </div>
+    <div>
+      <v-alert
+        slot="warning"
+        class="error"
+        :value="error">
+        There was an error bookmarking song.
+      </v-alert>
     </div>
     <v-layout>
       <v-flex xs3 text-xs-left>
@@ -19,39 +27,47 @@
 
 <script>
 import _bs from '@/services/BookmarkService'
+import {mapState} from 'vuex'
 export default {
   props: [
     'song'
   ],
+  computed: mapState(['isLoggedIn']),
   data () {
     return {
       bookmarked: false,
-      userId: this.$store.state.user.id
+      userId: this.$store.state.user.id,
+      error: false
     }
   },
   async mounted () {
-    const response = (
-      await _bs
-        .isBookmarked(this.userId, this.song.id))
-      .data
-    if (response.result) {
-      this.bookmarked = true
+    if (this.isLoggedIn) {
+      const response = (
+        await _bs
+          .isBookmarked(this.userId, this.song.id))
+        .data
+      this.bookmarked = !!response.result
     }
   },
   methods: {
     async bookmark () {
+      this.error = false
       const user = this.userId
       const song = this.song.id
       let res = null
       if (!this.bookmarked) {
-        res = (await _bs.addBookmark(user, song)).data
-        if (res.bookmark) {
-          this.bookmarked = true
+        try {
+          res = (await _bs.addBookmark(user, song)).data
+          this.bookmarked = !!res.bookmark
+        } catch (err) {
+          this.error = true
         }
       } else {
-        res = (await _bs.deleteBookmark(user, song)).data
-        if (res.message === 'Success') {
-          this.bookmarked = false
+        try {
+          res = (await _bs.deleteBookmark(user, song)).data
+          this.bookmarked = !res.message
+        } catch (err) {
+          this.error = true
         }
       }
     }
@@ -87,6 +103,7 @@ export default {
   bottom: 30px;
   right: -15px;
   color: green;
+  z-index: 2;
 }
 #bookmark-icon:hover {
   cursor: pointer;
@@ -96,5 +113,10 @@ export default {
 }
 #bookmark-icon.bookmarked {
   color: red;
+}
+.error {
+  margin: -20px -20px 20px -20px;
+  font-weight: bold;
+  background-color: darkred !important;
 }
 </style>
