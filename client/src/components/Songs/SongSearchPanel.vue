@@ -23,14 +23,11 @@ export default {
         query: {favorites: false, search: ''}
       }
       if (this.search !== '') {
-        route.query = {
-          search: value
-        }
+        route.query.search = value
       } else {
         delete route.query.search
       }
-      // use == because variable type is a string
-      if (this.$route.query.favorites == true) {
+      if (this.$route.query.favorites === true) {
         route.query.favorites = true
       } else {
         delete route.query.favorites
