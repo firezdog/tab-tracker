@@ -18,19 +18,26 @@ export default {
   components: {SongsPanel, SongSearchPanel},
   data () {
     return {
-      songs: null
+      songs: null,
+      favorites: false
     }
   },
   watch: {
+    '$route.query.favorites': {
+      immediate: true,
+      async handler (favorites) {
+        this.favorites = !!favorites
+      }
+    },
     '$route.query.search': {
       immediate: true,
       async handler (search) {
-        this.songs = (await SongService.searchSongs(search)).data
+        this.songs = (await SongService.searchSongs(search, this.favorites)).data
       }
     }
   },
   async mounted () {
-    this.songs = (await SongService.getAllSongs()).data
+    this.songs = (await SongService.getAllSongs(this.favorites)).data
   }
 }
 </script>

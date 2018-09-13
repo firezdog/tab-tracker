@@ -1,8 +1,10 @@
 import api from '@/services/api'
 
 export default {
-  getAllSongs () {
-    return api().get('songs')
+  getAllSongs (favorites) {
+    return api().get('songs', {
+      params: {favorites}
+    })
   },
   createSong (song) {
     return api().post('songs', song)
@@ -13,10 +15,11 @@ export default {
   updateSong (song) {
     return api().put(`songs/${song.id}`, song)
   },
-  searchSongs (search) {
+  searchSongs (search, favorites) {
     return api().get('songs', {
       params: {
-        search: search
+        search: search,
+        favorites
       }
     })
   }

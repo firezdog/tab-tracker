@@ -8,7 +8,8 @@ module.exports = {
     try {
       let songs = null
       const search = req.query.search
-      console.log(typeof search)
+      const favorites = req.query.favorites
+      console.log(favorites)
       if (search) {
         songs = await Song.findAll({
           where: {

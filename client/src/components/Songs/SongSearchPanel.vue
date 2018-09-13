@@ -8,6 +8,7 @@
 </template>
 
 <script>
+// for _.debounce, which allows a lag between user input and updated route, preventing excessive requests
 import _ from 'lodash'
 export default {
   data () {
@@ -18,12 +19,21 @@ export default {
   watch: {
     search: _.debounce(async function (value) {
       const route = {
-        name: 'songs'
+        name: 'songs',
+        query: {favorites: false, search: ''}
       }
       if (this.search !== '') {
         route.query = {
           search: value
         }
+      } else {
+        delete route.query.search
+      }
+      // use == because variable type is a string
+      if (this.$route.query.favorites == true) {
+        route.query.favorites = true
+      } else {
+        delete route.query.favorites
       }
       this.$router.push(route)
     }, 200),
