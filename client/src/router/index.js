@@ -6,6 +6,7 @@ import Songs from '@/components/Songs/Index'
 import NewSong from '@/components/NewSong'
 import Song from '@/components/Song/Index'
 import EditSong from '@/components/EditSong'
+import Favorites from '@/components/Songs/Favorites'
 
 Vue.use(Router)
 
@@ -44,6 +45,11 @@ export default new Router({
       path: '/songs/:songId/edit',
       name: 'EditSong',
       component: EditSong
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: Favorites
     }
   ]
 })

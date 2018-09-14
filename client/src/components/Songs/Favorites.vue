@@ -2,7 +2,7 @@
   <div>
     <v-layout>
       <v-flex xs6 offset-xs3>
-        <song-search-panel/>
+        <!-- <song-search-panel/> -->
         <songs-panel class="mt-2" :songs='songs'/>
       </v-flex>
     </v-layout>
@@ -12,25 +12,26 @@
 <script>
 import SongsPanel from './SongsPanel'
 import SongSearchPanel from './SongSearchPanel'
-import SongService from '@/services/SongService'
+import BookmarkService from '@/services/BookmarkService'
 export default {
   name: 'Songs',
   components: {SongsPanel, SongSearchPanel},
   data () {
     return {
-      songs: null
+      songs: null,
+      userId: this.$store.state.user.id
     }
   },
-  watch: {
-    '$route.query.search': {
-      immediate: true,
-      async handler (search) {
-        this.songs = (await SongService.searchSongs(search)).data
-      }
-    }
-  },
+  // watch: {
+  //   '$route.query.search': {
+  //     immediate: true,
+  //     async handler (search) {
+  //       this.songs = (await SongService.searchSongs(search)).data
+  //     }
+  //   }
+  // },
   async mounted () {
-    this.songs = (await SongService.getAllSongs()).data
+    this.songs = (await BookmarkService.getAllBookmarks(this.userId)).data.map(b => b.Song)
   }
 }
 </script>

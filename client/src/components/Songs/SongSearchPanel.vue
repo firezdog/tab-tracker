@@ -20,17 +20,12 @@ export default {
     search: _.debounce(async function (value) {
       const route = {
         name: 'songs',
-        query: {favorites: false, search: ''}
+        query: {search: ''}
       }
       if (this.search !== '') {
         route.query.search = value
       } else {
         delete route.query.search
-      }
-      if (this.$route.query.favorites === true) {
-        route.query.favorites = true
-      } else {
-        delete route.query.favorites
       }
       this.$router.push(route)
     }, 200),

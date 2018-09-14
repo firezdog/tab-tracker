@@ -1,6 +1,9 @@
 import api from '@/services/api'
 
 export default {
+  getAllBookmarks (userId) {
+    return api().get(`user/${userId}/bookmarks`)
+  },
   isBookmarked (userId, songId) {
     return api().get('bookmarks', {
       params:

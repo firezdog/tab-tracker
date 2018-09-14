@@ -5,9 +5,9 @@
         <v-btn id="home" flat dark to="/">TabTracker</v-btn>
       </v-toolbar-title>
       <v-toolbar-items>
-        <v-btn exact :to="{name: 'songs'}" flat dark>Browse</v-btn>
-        <v-btn exact :to="{name: 'NewSong'}" flat dark>New Song</v-btn>
-        <v-btn v-if="isLoggedIn" :to="{name: 'songs', query: {favorites: true}}" flat dark>My Songs</v-btn>
+        <v-btn :to="{name: 'songs', query: {search: null}}" flat dark>Browse</v-btn>
+        <v-btn :to="{name: 'NewSong'}" flat dark>New Song</v-btn>
+        <v-btn v-if="isLoggedIn" :to="{name: 'favorites'}" flat dark>My Songs</v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items>
