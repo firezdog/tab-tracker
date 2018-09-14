@@ -1,7 +1,25 @@
 /* jshint ignore:start */
 const {Bookmark, User, Song} = require('../models')
+const Sequelize = require('sequelize')
 
 module.exports = {
+
+  async favorites (req, res) {
+    const userId = req.params.user_id
+    console.log('running')
+    try {
+      const bookmarkedSongs = await Bookmark.findAll(
+        {where: {userId},
+          include: [{
+            model: Song,
+            where: {id: Sequelize.col('bookmark.songId')}
+          }]
+        })
+      res.send(bookmarkedSongs)
+    } catch (err) {
+      res.status(500).send({error: 'There was an error.'})
+    }
+  },
 
   // purpose: determine whether a given user has bookmarked a given song.
   async index (req, res) {

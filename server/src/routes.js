@@ -15,4 +15,5 @@ module.exports = (app) => {
   app.get('/bookmarks', BookmarksController.index)
   app.post('/bookmarks', BookmarksController.create)
   app.delete('/bookmarks', BookmarksController.destroy)
+  app.get('/user/:user_id/bookmarks', BookmarksController.favorites)
 }
