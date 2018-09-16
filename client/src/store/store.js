@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   strict: true,
   state: {
     token: null,
@@ -11,6 +11,14 @@ export default new Vuex.Store({
     isLoggedIn: false
   },
   mutations: {
+    initialiseStore (state) {
+      // Check if there is something in storage.
+      if (localStorage.getItem('store')) {
+        // Replace current state with store (using spread to merge)
+        let store = JSON.parse(localStorage.getItem('store'))
+        this.replaceState({...state, ...store})
+      }
+    },
     setToken (state, token) {
       state.token = token
     },
@@ -33,3 +41,13 @@ export default new Vuex.Store({
     }
   }
 })
+
+store.commit('initialiseStore')
+
+// Cache store in local storage
+store.subscribe((mutation, state) => {
+  // Store the state as a JSON item under 'store' key.
+  localStorage.setItem('store', JSON.stringify(state))
+})
+
+export default store

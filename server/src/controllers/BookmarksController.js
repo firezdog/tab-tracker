@@ -37,8 +37,7 @@ module.exports = {
       }
       res.send(bookmarkedSongs)
     } catch (err) {
-      res.status(500).send({error: 'There was an error.'})
-      console.log('\nERROR\n' + err)
+      res.status(500).send({error: 'There was an error while loading favorites.'})
     }
   },
 
@@ -53,7 +52,7 @@ module.exports = {
         res.json({result: false})
       }
     } catch (err) {
-      res.status(500).json({error: 'An error occurred.'})
+      res.status(500).json({error: 'An error occurred while getting bookmarks.'})
     }
   },
 
@@ -80,7 +79,7 @@ module.exports = {
       await bookmark.destroy()
       res.send({message: 'Success'})
     } catch (error) {
-      res.status(500).send({error: 'There was an error.'})
+      res.status(500).send({error: 'There was an error while trying to delete the bookmark.'})
     }
   }
 
