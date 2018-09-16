@@ -15,5 +15,10 @@ export default {
   },
   deleteBookmark (userId, songId) {
     return api().delete('bookmarks', {data: {userId, songId}})
+  },
+  searchSongs (userId, search) {
+    return api().get(`user/${userId}/bookmarks`, {
+      params: {search}
+    })
   }
 }

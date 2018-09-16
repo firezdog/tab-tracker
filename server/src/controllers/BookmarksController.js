@@ -6,18 +6,39 @@ module.exports = {
 
   async favorites (req, res) {
     const userId = req.params.user_id
-    console.log('running')
     try {
-      const bookmarkedSongs = await Bookmark.findAll(
-        {where: {userId},
+      const search = req.query.search
+      let bookmarkedSongs = null
+      if (search) {
+        bookmarkedSongs = await Bookmark.findAll({
+          where: {userId},
           include: [{
             model: Song,
-            where: {id: Sequelize.col('bookmark.songId')}
+            where: {id: Sequelize.col('bookmark.songId'),
+              $or: [
+                'title', 'artist', 'genre', 'album'
+              ].map(key => ({
+                [key]: {
+                  $like: `%${search}%`
+                }
+              }))
+            }
           }]
         })
+      } else {
+        bookmarkedSongs = await Bookmark.findAll(
+          {where: {userId},
+            include: [{
+              model: Song,
+              where: {id: Sequelize.col('bookmark.songId')}
+            }]
+          }
+        )
+      }
       res.send(bookmarkedSongs)
     } catch (err) {
       res.status(500).send({error: 'There was an error.'})
+      console.log('\nERROR\n' + err)
     }
   },
 

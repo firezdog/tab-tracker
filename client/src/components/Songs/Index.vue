@@ -2,7 +2,7 @@
   <div>
     <v-layout>
       <v-flex xs6 offset-xs3>
-        <song-search-panel/>
+        <song-search-panel target='songs'/>
         <songs-panel class="mt-2" :songs='songs'/>
       </v-flex>
     </v-layout>

@@ -2,7 +2,7 @@
   <div>
     <v-layout>
       <v-flex xs6 offset-xs3>
-        <!-- <song-search-panel/> -->
+        <song-search-panel target='favorites'/>
         <songs-panel class="mt-2" :songs='songs'/>
       </v-flex>
     </v-layout>
@@ -22,14 +22,14 @@ export default {
       userId: this.$store.state.user.id
     }
   },
-  // watch: {
-  //   '$route.query.search': {
-  //     immediate: true,
-  //     async handler (search) {
-  //       this.songs = (await SongService.searchSongs(search)).data
-  //     }
-  //   }
-  // },
+  watch: {
+    '$route.query.search': {
+      immediate: true,
+      async handler (search) {
+        this.songs = (await BookmarkService.searchSongs(this.userId, search)).data.map(b => b.Song)
+      }
+    }
+  },
   async mounted () {
     this.songs = (await BookmarkService.getAllBookmarks(this.userId)).data.map(b => b.Song)
   }

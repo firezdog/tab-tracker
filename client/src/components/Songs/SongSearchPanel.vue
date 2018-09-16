@@ -16,10 +16,11 @@ export default {
       search: ''
     }
   },
+  props: ['target'],
   watch: {
     search: _.debounce(async function (value) {
       const route = {
-        name: 'songs',
+        name: this.target,
         query: {search: ''}
       }
       if (this.search !== '') {
