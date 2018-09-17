@@ -8,7 +8,7 @@
         slot="warning"
         class="error"
         :value="error">
-        There was an error bookmarking song.
+        A network error occurred.  Please try again.
       </v-alert>
     </div>
     <v-layout>
@@ -103,13 +103,13 @@ export default {
   bottom: 30px;
   right: -15px;
   color: green;
-  z-index: 2;
 }
 #bookmark-icon:hover {
   cursor: pointer;
   font-size: 80px;
   bottom: -5px;
   right: -30px;
+  z-index: 1;
 }
 #bookmark-icon.bookmarked {
   color: red;
